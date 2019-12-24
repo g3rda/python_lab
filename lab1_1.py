@@ -2,7 +2,6 @@ from urllib.request import urlopen
 import pandas as pd
 from datetime import datetime
 import glob
-from spyre import server
 
 di = {1: 22, 2: 24, 3: 23, 4: 25, 5: 3, 6: 4, 7: 8, 8: 19, 9: 20, 10: 21, 11: 9, 13: 10, 14: 11,15:12, 16:13, 17:14, 18:15, 19:16, 21:17, 22:18, 23: 6, 24:1, 25:2, 26:7, 27:5}
 
@@ -63,29 +62,11 @@ def middledry(prid, path):
 	df=pd.read_csv(filename[0])
 	data = df[df['VHI'] < 35]
 	print(data[['year']].drop_duplicates())
-	
 
+
+for i in range(1,28):
+	getcsv(i)
+
+todf('/home/lemonade/python/')
 print ("Done.");
 
-
-class SimpleApp(server.App):
-	title = "Simple App"
-	inputs = [{
-		"type": "text",
-		"key": "words",
-		"label": "write words here",
-		"value": "hello world", 
-		"action_id": "simple_html_output"
-	}]
-
-	outputs = [{
-		"type": "html",
-		"id": "simple_html_output"
-	}]
-
-	def getHTML(self, params):
-		words = params["words"]
-		return "Here's what you wrote in the textbox: <b>%s</b>" % words
-
-app = SimpleApp()
-app.launch()
